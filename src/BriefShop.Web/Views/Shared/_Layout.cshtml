@@ -1,0 +1,158 @@
+﻿@using System.Threading
+@using System.Web.Optimization
+@using Abp.Configuration
+@using Abp.Timing
+@using BriefShop
+@using Abp.Dependency
+@using Abp.Web.Mvc.Alerts
+@using Abp.Web.Mvc.Extensions
+@{
+	SetAntiForgeryCookie();
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 9 ]> <html lang="en" dir="ltr" class="no-js ie-old"> <![endif]-->
+<!--[if IE 9 ]> <html lang="en" dir="ltr" class="no-js ie9"> <![endif]-->
+<!--[if IE 10 ]> <html lang="en" dir="ltr" class="no-js ie10"> <![endif]-->
+<!--[if (gt IE 10)|!(IE)]><!-->
+<html lang="en" dir="ltr" class="no-js">
+<!--<![endif]-->
+
+<head>
+
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- META TAGS                                 -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<meta charset="utf-8">
+	<!-- Always force latest IE rendering engine -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Mobile specific meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- PAGE TITLE                                -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<title>BriefShop</title>
+
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- SEO METAS                                 -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<meta name="description" content="online store">
+	<meta name="author" content="">
+
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- PAGE FAVICON                              -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="apple-touch-icon" href="~/images/favicon/apple-touch-icon.png">
+	<link rel="icon" href="~/images/favicon/favicon.ico">
+
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- GOOGLE FONTS                              -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- Include CSS Filess                        -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	@Html.IncludeStyle("~/Vendors/linearicons/css/linearicons.css")
+	@Html.IncludeStyle("~/Vendors/owl-carousel/owl.carousel.min.css")
+	@Html.IncludeStyle("~/Vendors/owl-carousel/owl.theme.min.css")
+	@Html.IncludeStyle("~/Vendors/flexslider/flexslider.css")
+
+	@Styles.Render("~/Bundles/vendor/css")
+	@Styles.Render("~/Bundles/css")
+
+	<!-- View specific styles -->
+	@RenderSection("styles", required: false)
+
+	<script type="text/javascript">
+        //This is used to get the application's root path from javascript. It's useful if you're running application in a virtual directory under IIS.
+        var abp = abp || {}; abp.appPath = '@ApplicationPath';
+	</script>
+</head>
+
+<body id="body" class="wide-layout preloader-active">
+
+	<!--[if lt IE 9]>
+		<p class="browserupgrade alert-error">
+			You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+		</p>
+	<![endif]-->
+
+	<noscript>
+		<div class="noscript alert-error">
+			For full functionality of this site it is necessary to enable JavaScript. Here are the <a href="http://www.enable-javascript.com/" target="_blank">
+				instructions how to enable JavaScript in your web browser
+			</a>.
+		</div>
+	</noscript>
+
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- PRELOADER                                 -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- Preloader -->
+	<div id="preloader" class="preloader">
+		<div class="loader-cube">
+			<div class="loader-cube__item1 loader-cube__item"></div>
+			<div class="loader-cube__item2 loader-cube__item"></div>
+			<div class="loader-cube__item4 loader-cube__item"></div>
+			<div class="loader-cube__item3 loader-cube__item"></div>
+		</div>
+	</div>
+	<!-- End Preloader -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- WRAPPER                                   -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<div id="pageWrapper" class="page-wrapper">
+		@Html.Partial("~/Views/Layout/_Header.cshtml")
+		<!-- –––––––––––––––[ PAGE CONTENT ]––––––––––––––– -->
+		<main id="mainContent" class="main-content">
+			@RenderBody()
+		</main>
+		<!-- –––––––––––––––[ END PAGE CONTENT ]––––––––––––––– -->
+		@Html.Partial("~/Views/Layout/_Footer.cshtml")
+	</div>
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- END WRAPPER                               -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- BACK TO TOP                               -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<div id="backTop" class="back-top is-hidden-sm-down">
+		<i class="fa fa-angle-up" aria-hidden="true"></i>
+	</div>
+
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- SCRIPTS                                   -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	<!-- (!) Placed at the end of the document so the pages load faster -->
+	<!-- ––––––––––––––––––––––––––––––––––––––––– -->
+	@Html.IncludeScript("~/Scripts/jquery-3.3.1.min.js")
+
+	@Scripts.Render("~/Bundles/vendor/js/bottom")
+
+	@Html.IncludeScript("~/Vendors/modernizr/modernizr-2.6.2.min.js")
+	@Html.IncludeScript("~/Vendors/owl-carousel/owl.carousel.min.js")
+	@Html.IncludeScript("~/Vendors/flexslider/jquery.flexslider-min.js")
+	@Html.IncludeScript("~/Vendors/countdown/jquery.countdown.js")
+
+	<script>
+        //Localizing momentjs
+        moment.locale('@Thread.CurrentThread.CurrentUICulture.Name');
+	</script>
+
+	<!-- Dynamic scripts of ABP system (They are created on runtime and can not be bundled) -->
+	<script src="~/api/AbpServiceProxies/GetAll?v=@(Clock.Now.Ticks)"></script>
+	<script src="~/AbpScripts/GetScripts?v=@(Clock.Now.Ticks)" type="text/javascript"></script>
+
+	<!-- SignalR scripts -->
+	<script src="~/signalr/hubs"></script>
+	@Html.IncludeScript("~/Abp/Framework/scripts/libs/abp.signalr.js")
+	<script src="~/Views/Account/Login.js"></script>
+
+	<!-- View specific scripts -->
+	@RenderSection("scripts", required: false)
+</body>
+
+</html>
+

@@ -1,0 +1,59 @@
+﻿@using Abp.Web.Mvc.Extensions
+
+@section scripts
+{
+	@Html.IncludeScript("~/js/Account/Login.js")
+}
+
+<div class="page-container ptb-60">
+	<div class="container">
+		<section class="sign-area panel p-40">
+			<h3 class="sign-title">Sign In<small>Or <a href="@Url.Action("Register", "Account")" class="color-green">Sign Up</a></small></h3>
+			<div class="row row-rl-0">
+				<div class="col-sm-6 col-md-7 col-left">
+					<form id="LoginForm" class="p-40" action="Login" method="POST">
+						<input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+						<div class="form-group">
+							<label class="sr-only">账号</label>
+							<input type="text" class="form-control input-lg" placeholder="Email" name="usernameOrEmailAddress" id="usernameOrEmailAddress" required autofocus maxlength="100" />
+						</div>
+						<div class="form-group">
+							<label class="sr-only">密码</label>
+							<input type="password" class="form-control input-lg" placeholder="Password" name="password" id="password" required maxlength="100" />
+						</div>
+						<div class="form-group">
+							<a href="@Url.Action("ForgotPassword", "Account")" class="forgot-pass-link color-green">Forget Youe Password ?</a>
+						</div>
+						<div class="custom-checkbox mb-20">
+							<input type="checkbox" id="remember_account" name="rememberMe" checked>
+							<label class="color-mid" for="remember_account">Keep me signed in on this computer.</label>
+						</div>
+						<button type="submit" class="btn btn-block btn-lg">Sign In</button>
+					</form>
+					<span class="or">Or</span>
+				</div>
+				<div class="col-sm-6 col-md-5 col-right">
+					<div class="social-login p-40">
+						<div class="mb-20">
+							<button class="btn btn-lg btn-block btn-social btn-facebook"><i class="fa fa-facebook-square"></i>Sign In with Facebook</button>
+						</div>
+						<div class="mb-20">
+							<button class="btn btn-lg btn-block btn-social btn-twitter"><i class="fa fa-twitter"></i>Sign In with Twitter</button>
+						</div>
+						<div class="mb-20">
+							<button class="btn btn-lg btn-block btn-social btn-google-plus"><i class="fa fa-google-plus"></i>Sign In with Google</button>
+						</div>
+						<div class="custom-checkbox mb-20">
+							<input type="checkbox" id="remember_social" checked>
+							<label class="color-mid" for="remember_social">Keep me signed in on this computer.</label>
+						</div>
+						<div class="text-center color-mid">
+							Need an Account ? <a href="@Url.Action("Register", "Account")" class="color-green">Create Account</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+
